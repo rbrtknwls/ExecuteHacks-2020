@@ -15,8 +15,7 @@
 
 
 </head>
-<script src="/socket.io/socket.io.js"></script>
-<script src="js/main.js"></script>
+
 
 <body>
 
@@ -24,14 +23,9 @@
 
 
 </body>
-<script>
-  var socket = io.connect();
 
-  var userid = getUserId()
-  socket.on('connect', () => {
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/client-socket.js" charset="utf-8"></script>
 
-
-  });
-
-</script>
 </html>
