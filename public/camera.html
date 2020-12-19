@@ -143,12 +143,12 @@
 
     function drawProcessed(){
         cctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
+        cctx.beginPath();
         cctx.rect(_x,_y,_width,_height);
         cctx.lineWidth = _lineWidth;
         cctx.strokeStyle = _color;
         cctx.stroke();
-
+        
         setTimeout(drawProcessed, 100);
     }
     drawProcessed();
