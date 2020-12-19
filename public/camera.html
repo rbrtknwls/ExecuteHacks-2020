@@ -24,6 +24,10 @@
         text-align: center;
     }
 
+    #container {
+        position: relative;
+    }
+
     #capture {
         display: none;
     }
@@ -47,7 +51,10 @@
 <div class="play-area">
     <div class="play-area-sub">
         <h3>The Stream</h3>
-        <video id="stream" width="320" height="240"></video>
+        <div class="container">
+            <video id="stream" width="320" height="240"></video>
+            <canvas id="streamCanvas" width="320" height="240"></canvas>
+        </div>
     </div>
     <div class="play-area-sub">
         <h3>The Capture</h3>
@@ -75,6 +82,12 @@
     btnStop.addEventListener( "click", stopStreaming );
     btnCapture.addEventListener( "click", captureSnapshot );
 
+    // Processed stream
+    var video = document.querySelector("#stream");
+    var canvas = document.querySelector("#streamCanvas");
+    canvas.style.display="none";
+    var cctx = canvas.getContext('2d');
+
     // Start Streaming
     function startStreaming() {
         var mediaSupport = 'mediaDevices' in navigator;
@@ -84,6 +97,7 @@
                     cameraStream = mediaStream;
                     stream.srcObject = mediaStream;
                     stream.play();
+                    canvas.style.display="";
                 })
                 .catch( function( err ) {
 
@@ -103,6 +117,7 @@
             track.stop();
             stream.load();
             cameraStream = null;
+            canvas.style.display="none";
         }
     }
 
@@ -112,11 +127,31 @@
             var img = new Image();
             ctx.drawImage( stream, 0, 0, capture.width, capture.height );
             img.src		= capture.toDataURL( "image/png" );
-            img.width	= 240;
+            img.width	= 320;
             snapshot.innerHTML = '';
             snapshot.appendChild( img );
         }
     }
+
+    // Processed data
+    var _x = 50;
+    var _y = 50;
+    var _height = 100;
+    var _width =  100;
+    var _color = "red";
+    var _lineWidth = "3";
+
+    function drawProcessed(){
+        cctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        cctx.rect(_x,_y,_width,_height);
+        cctx.lineWidth = _lineWidth;
+        cctx.strokeStyle = _color;
+        cctx.stroke();
+
+        setTimeout(drawProcessed, 100);
+    }
+    drawProcessed();
 
 </script>
 </html>
