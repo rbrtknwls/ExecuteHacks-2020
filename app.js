@@ -34,6 +34,9 @@ app.get('/', function(req, res) {
 app.get('/debug', function (req, res) {
   res.sendFile(path.join(__dirname + '/pages/template.html'));
 });
+app.get('/camera', function (req, res) {
+    res.sendFile(path.join(__dirname + '/public/camera.html'))
+})
 
 
 server.listen(PORT);
