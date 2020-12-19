@@ -63,6 +63,8 @@
     </div>
 </div>
 
+<input type="hidden" id="image-uri" value="">
+
 <script>
     // The buttons to start & stop stream and to capture the image
     var btnStart = document.getElementById( "btn-start" );
@@ -127,6 +129,7 @@
             var img = new Image();
             ctx.drawImage( stream, 0, 0, capture.width, capture.height );
             img.src		= capture.toDataURL( "image/png" );
+            document.getElementById("image-uri").value = img.src;
             img.width	= 320;
             snapshot.innerHTML = '';
             snapshot.appendChild( img );
@@ -154,4 +157,8 @@
     drawProcessed();
 
 </script>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/client-socket.js" charset="utf-8"></script>
+
 </html>
