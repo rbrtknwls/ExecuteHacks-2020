@@ -1,0 +1,36 @@
+figure{
+    width:300px;
+    overflow: hidden;
+    margin:0;
+}
+figure img
+{
+    display:block; /*remove inline-block spaces*/
+}
+@import 'https://fonts.googleapis.com/css?family=Roboto+Mono:100';
+h1{
+  font-family: 'Roboto Mono', monospace;
+  font-size: 75px;
+}
+h4{
+  font-family: 'Roboto Mono', monospace;
+
+}
+
+.btn-side{
+    background-color: #8064A2 !important;
+    color: white !important;
+}
+.UserListHead{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+button{
+    outline:none!important;
+}
+
+input{
+    outline: none;
+}
+
