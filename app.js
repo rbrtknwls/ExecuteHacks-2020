@@ -10,14 +10,42 @@ var Chart = require('chart.js');
 
 // CONSTANTS AND API KEYS
 const PORT = process.env.PORT || 3000;
-
-
+// Create S3 service object
 const config = {
-    accessKeyId: "",
-    secretAccessKey: "",
-    region: "us-east-2"
+    accessKeyId: "AKIAQJA33FRRIO3CBXJA",
+    secretAccessKey: "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",
+    region: "ca-central-1"
 
 };
+s3 = new AWS.S3(config);
+rekognition = new AWS.Rekognition(config)
+
+var bucketParams = {
+  Bucket : 'facialrecognition34234018257012374',
+};
+
+// Call S3 to obtain a list of the objects in the bucket
+s3.listObjects(bucketParams, function(err, data) {
+  if (err) {
+    console.log("Error", err);
+  } else {
+    console.log("Success", data);
+
+    var params = {
+     Image: {
+      S3Object: {
+       Bucket: "facialrecognition34234018257012374",
+       Name: "logo.png"
+      }
+     }
+    };
+
+    rekognition.detectFaces(params, function(err, data) {
+       if (err) console.log(err, err.stack); // an error occurred
+       else     console.log(data);
+     });
+  }
+});
 
 // Instancate OBJECTS
 var app = express();
