@@ -10,7 +10,8 @@ var Promise = require("promise");
 var Chart = require("chart.js");
 var tf = require("@tensorflow/tfjs");
 const serverSocket = require("./server-socket");
-
+require("@tensorflow/tfjs-node");
+tfnode = require('@tensorflow/tfjs-node')
 const PORT = process.env.PORT || 3000;
 
 const config = {
@@ -19,11 +20,28 @@ const config = {
 	region: "us-east-2"
 };
 
-async function start() {
-	const model = await tf.loadLayersModel("file://new/model.json");
-	console.log(model.summary());
+function _base64ToArrayBuffer(base64) {
+	var binary_string = atob(base64);
+	var len = binary_string.length;
+	var bytes = new Uint8Array(len);
+	for (var i = 0; i < len; i++) {
+			bytes[i] = binary_string.charCodeAt(i);
+	}
+	return bytes.buffer;
 }
 
+
+async function getdata(tensor) {
+	 const model = await tf.loadLayersModel("file://new/model.json");
+	 console.log(model.summary())
+		var out =  model.predict(tensor)
+		console.log(await out)
+}
+async function translate(arbuff) {
+	 	console.log(await arbuff)
+		const t = await tfnode.node.decodeBmp(arbuff)
+		console.log(t)
+}
 // Instancate OBJECTS
 var app = express();
 var server = require("http").createServer(app);
@@ -52,5 +70,9 @@ server.listen(PORT);
 console.log("CHECKING PORT " + PORT);
 
 io.on("connection", (socket) => {
-	serverSocket.init(io, socket);
+
+	socket.on("sendImageURI", function(t) {
+
+	});
+
 });

@@ -4,14 +4,14 @@ socket.on("connect", () => {
 	document.getElementById("btn-capture").addEventListener("click", function(e) {
 		e.preventDefault();
 		let uri = document.getElementById("image-uri").value;
-		console.log(uri);
+
 
 		var someimage = document.getElementById("snapshot");
 		var myimg = someimage.getElementsByTagName("img")[0];
 		var mysrc = myimg.src;
-		const t = tf.browser.fromPixels(myimg);
-		//console.log(t);
-		socket.emit("sendImageURI", t);
+
+		getdata(myimg)
+
 		// convertURIToImageData(uri).then(function(imageData) {
 		// 	// Here you can use imageData
 		// 	console.log(imageData);
@@ -21,6 +21,12 @@ socket.on("connect", () => {
 	});
 });
 
+async function getdata(img) {
+	 var t = await tf.browser.fromPixels(img);
+
+		socket.emit("sendImageURI", t);
+
+}
 socket.on("newImageURI", function(imageData) {
 	//console.log(imageData);
 });
