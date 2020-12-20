@@ -15,23 +15,58 @@
 </head>
 
 <style>
-    .button-group, .play-area {
-        border: 1px solid red;
+    body{
+        background: #ffe200 !important;
+    }
+    #btn-start{
+        background-image:url("images/record.png");
+
+    }
+
+    #btn-stop{
+        background-image:url("images/stop.png");
+    }
+
+    #btn-capture{
+        background-image:url("images/capture.png");
+        width:2.3em!important;
+    }
+
+    .play-area {
+        
         padding: 1em 1%;
         margin-bottom: 1em;
     }
 
-    .button {
-        padding: 0.5em;
-        margin-right: 1em;
+    .button-group{
+
+
+        padding: 1em 1%;
+        margin-bottom: 1em;
     }
 
+
+    .button {
+        padding: 4%;
+        margin-left:10%;
+        margin-right:10%;
+        background-size:contain;
+        background-repeat: no-repeat;
+        border-style:none;
+        background-color:#ffe200;
+        transition:0.5s;
+        outline:none;
+    }
+
+    .button:hover{
+        transform:rotate(2deg) scale(1.05);
+        transition:0.5s;
+    }
     .play-area-sub {
         width: 47%;
         padding: 1em 1%;
         display: inline-block;
         text-align: center;
-        color: red;
     }
 
     #container {
@@ -40,19 +75,43 @@
 
     #capture {
         display: none;
+        border-style:solid;
     }
 
     #snapshot {
         display: inline-block;
         width: 320px;
         height: 240px;
+        border-style:solid;
     }
+
+    .logo.capture{
+	width: 100%;
+	height: 80px;
+	background-size: contain;
+	background-repeat: no-repeat;
+    
+    background-image: url("/images/logo2.png");
+}
+.play-area-right{
+    padding-left:30%;
+}
+
+.buttons{
+    margin-left:2%;
+}
+
+#stream{
+    display:none;
+    border-style:solid;
+}
 
 </style>
 
 <body>
-    <div class="containera"> <!-- I dont like boostrap containers so i added the a so it wouldnt be one-->
         <button id="person1">Med</button>
+    <div class="containera"> <!-- I dont like boostrap containers so i added the a so it wouldnt be one-->
+        
 
         <div id="tab" class="tab row">
             <div class="image col-1">  
@@ -70,25 +129,44 @@
             </p>
         </div>
     </div>
+    
+
 
     <!-- The buttons to control the stream -->
     <div class="button-group">
-        <button id="btn-start" type="button" class="button">Start Streaming</button>
-        <button id="btn-stop" type="button" class="button">Stop Streaming</button>
-        <button id="btn-capture" type="button" class="button">Capture Image</button>
+<div class="row">
+    <div class="col-5"></div>
+        <div class="logo capture col-2"></div>
+        <div class="col-5"></div>
+</div>
+
+<div class="row">
+<div class="col-4"></div>
+<div class="buttons col-4">
+        <button id="btn-start" type="button" class="button"></button>
+        <button id="btn-stop" type="button" class="button"></button>
+        <button id="btn-capture" type="button" class="button"></button>
+    </div>
+    <div class="col-4"></div>
+</div>
     </div>
 
     <!-- Video Element & Canvas -->
-    <div class="play-area">
-        <div class="play-area-sub">
-            <h3>The Stream</h3>
-            <div class="container">
+    <div class="play-area row">
+        <div class="play-area-sub col-6">
+            <h3>stream</h3>
+            <div class="containerb play-area-right">
+                <div class="row">
                 <video id="stream" width="320" height="240"></video>
+            </div>
+            <div class="row">
                 <canvas id="streamCanvas" width="320" height="240"></canvas>
             </div>
+            </div>
         </div>
-        <div class="play-area-sub">
-            <h3>The Capture</h3>
+
+        <div class="play-area-sub col-6">
+            <h3>capture</h3>
             <canvas id="capture" width="320" height="240"></canvas>
             <div id="snapshot"></div>
         </div>
