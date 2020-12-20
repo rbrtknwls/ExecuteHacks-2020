@@ -4,11 +4,13 @@ socket.on("connect", () => {
 	document.getElementById("btn-capture").addEventListener("click", function(e) {
 		e.preventDefault();
 		let uri = document.getElementById("image-uri").value;
-		convertURIToImageData(uri).then(function(imageData) {
-			// Here you can use imageData
-			console.log(imageData);
-			socket.emit("sendImageURI", imageData);
-		});
+		socket.emit("sendImageURI", uri);
+
+		// convertURIToImageData(uri).then(function(imageData) {
+		// 	// Here you can use imageData
+		// 	console.log(imageData);
+		// 	socket.emit("sendImageURI", imageData);
+		// });
 	});
 });
 
