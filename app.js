@@ -29,12 +29,17 @@ app.use(express.static(__dirname + "/public"));
 app.get("/", function(req, res) {
 	res.sendFile(path.join(__dirname + "/index.html"));
 });
+
 app.get("/debug", function(req, res) {
 	res.sendFile(path.join(__dirname + "/pages/template.html"));
 });
 
+app.get("/home", function(req, res) {
+	res.sendFile(path.join(__dirname + "/pages/home.html"));
+});
+
 app.get("/camera", function(req, res) {
-	res.sendFile(path.join(__dirname + "/public/camera.html"));
+	res.sendFile(path.join(__dirname + "/pages/camera.html"));
 });
 
 server.listen(PORT);
