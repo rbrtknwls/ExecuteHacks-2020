@@ -7,7 +7,8 @@ var atob = require('atob')
 var im = require('imagemagick');
 var Promise = require('promise');
 var Chart = require('chart.js');
-
+var tf = require('@tensorflow/tfjs');
+require("@tensorflow/tfjs-node");
 // CONSTANTS AND API KEYS
 const PORT = process.env.PORT || 3000;
 
@@ -18,6 +19,27 @@ const config = {
     region: "us-east-2"
 
 };
+
+
+
+n = tf.tensor([[[[1, 2, 3, 4],[1,2,3,4]],[[1, 2, 3, 4],[1,2,3,4]]],[[1, 2, 3, 4],[1,2,3,4]],[[1, 2, 3, 4],[1,2,3,4]]])
+async function start() {
+    const model = await tf.loadLayersModel('file://new/model.json');
+    console.log(model.summary())
+    console.log(model.predict(n))
+
+
+
+
+}
+
+start()
+
+
+
+
+
+
 
 // Instancate OBJECTS
 var app = express();
