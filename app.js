@@ -34,8 +34,8 @@ app.get("/debug", function(req, res) {
 	res.sendFile(path.join(__dirname + "/pages/template.html"));
 });
 
-app.get("/home", function(req, res) {
-	res.sendFile(path.join(__dirname + "/pages/home.html"));
+app.get("/capture", function(req, res) {
+	res.sendFile(path.join(__dirname + "/pages/capture.html"));
 });
 
 app.get("/camera", function(req, res) {
